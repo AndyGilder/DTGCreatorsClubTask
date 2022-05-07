@@ -1,5 +1,5 @@
 .mod-list {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(3, 590px);
     gap: 40px;
 }

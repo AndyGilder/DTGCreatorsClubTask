@@ -1,4 +1,36 @@
 .mod-item {
-    color: #c9d1d9;
+    color: #111;
     text-decoration: none;
+}
+
+.mod-details-container {
+    position: relative;
+    background: #999999;
+}
+
+.mod-thumbnail {
+    width: 590px;
+    height: 330px;
+    object-fit: cover;
+}
+
+.mod-meta-data {
+    padding: 20px;
+    max-height: 54px;
+}
+
+.mod-meta-data .mod-title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.mod-meta-data .mod-category {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #999999;
+    padding: 7px 10px;
+    border-radius: 35%;
+    font-weight: bold;
+    letter-spacing: .5px;
 }

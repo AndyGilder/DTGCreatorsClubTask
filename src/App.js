@@ -8,7 +8,6 @@ const modListEndpoint = 'https://ugc-api.dovetailgames.com/mods?page=1&pageSize=
 
 function App() {
   const [ modList, setModList ] = useState([]);
-
   const [ loadingSpinner, showLoadingSpinner, hideLoadingSpinner ] = LoadingSpinner();
   
   useEffect(() => {

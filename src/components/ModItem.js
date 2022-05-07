@@ -12,13 +12,14 @@ function ModItem({
 }) {
     return (
         <a href={`https://ugc-api.dovetailgames.com/mods/${modId}`} className="mod-item">
-            <div>Title: {modTitle}</div>
-            <div>Category: {modCategory}</div>
-            <div>Long description: {modLongDesc}</div>
-            <div>Ratings count: {modRatingsCount}</div>
-            <div>Subs count: {modSubsCount}</div>
-            <img src={modThumbnail} width="591" height="332" alt="Mod thumbnail" />
-            <br />
+            <div className="mod-details-container">
+                <img src={modThumbnail} alt="Mod thumbnail" className="mod-thumbnail" />
+                <div className="mod-meta-data">
+                    <div className="mod-title">{modTitle}</div>
+                    <div className="mod-category">{modCategory}</div>
+                    <div>{modSubsCount} subscribers</div>
+                </div>
+            </div>
         </a>
     );
 }
