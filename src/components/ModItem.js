@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './ModItem.css';
 
 function ModItem({
@@ -11,7 +12,7 @@ function ModItem({
     modTags,
 }) {
     return (
-        <a href={`https://ugc-api.dovetailgames.com/mods/${modId}`} className="mod-item">
+        <Link to={`/ModDetails/${modId}`} className="mod-item">
             <div className="mod-details-container">
                 <img src={modThumbnail} alt="Mod thumbnail" className="mod-thumbnail" />
                 <div className="mod-meta-data">
@@ -20,7 +21,7 @@ function ModItem({
                     <div>{modSubsCount} subscribers</div>
                 </div>
             </div>
-        </a>
+        </Link>
     );
 }
 
