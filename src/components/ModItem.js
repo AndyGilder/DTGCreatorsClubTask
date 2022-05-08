@@ -13,8 +13,9 @@ function ModItem({
 }) {
     return (
         <Link to={`/ModDetails/${modId}`} className="mod-item">
-            <div className="mod-details-container">
+            <div className="mod-item-details-container">
                 <img src={modThumbnail} alt="Mod thumbnail" className="mod-thumbnail" />
+
                 <div className="mod-meta-data">
                     <div className="mod-title">{modTitle}</div>
                     <div className="mod-category">{modCategory}</div>

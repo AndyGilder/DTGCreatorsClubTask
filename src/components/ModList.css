@@ -1,3 +1,10 @@
+.mod-list-search {
+    width: 600px;
+    height: 40px;
+    margin: 20px;
+    font-size: 20px;
+}
+
 .mod-list {
     display: grid;
     grid-template-columns: repeat(3, 590px);

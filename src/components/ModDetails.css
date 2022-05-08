@@ -1,5 +1,10 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
 
+.mod-details-container {
+    width: 80vw;
+    margin: auto;
+}
+
 .mod-gallery-container .image-gallery-image {
     max-height: 50vh !important;
 }
@@ -16,4 +21,5 @@
 .mod-details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 20px;
 }

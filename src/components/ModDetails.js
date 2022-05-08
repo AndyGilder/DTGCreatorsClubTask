@@ -20,9 +20,9 @@ function ModDetails() {
       .then(response => {
         const galleryImages = [];
 
-        response.data.data.screenshots.map((screenshot) => {
-          galleryImages.push({ original: screenshot.url });
-        });
+        response.data.data.screenshots.map((screenshot) => (
+          galleryImages.push({ original: screenshot.url })
+        ))
 
         setState({
           modDetails: response.data.data,
@@ -34,10 +34,12 @@ function ModDetails() {
       .catch(err => {
         console.log(err);
       })
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <div className="mod-details-container">
       { loadingSpinner }
 
       <div className="mod-details-headline-container">
