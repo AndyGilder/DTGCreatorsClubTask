@@ -5,7 +5,7 @@
 
 .mod-item-details-container {
     position: relative;
-    background: #999999;
+    background: #ddd;
 }
 
 .mod-thumbnail {
@@ -28,7 +28,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: #999999;
+    background: #ddd;
     padding: 7px 10px;
     border-radius: 35%;
     font-weight: bold;
