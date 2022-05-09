@@ -3,14 +3,16 @@ import { useState } from 'react';
 import ModItem from './ModItem';
 
 function ModList({ modList }) {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [state, setState] = useState({
+        searchTerm: '',
+    });
 
     const modItems = modList.filter((mod) => {
         let returnedMods;
 
-        if (searchTerm === '') {
+        if (state.searchTerm === '') {
             returnedMods = mod;
-        } else if (mod.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+        } else if (mod.title.toLowerCase().includes(state.searchTerm.toLowerCase())) {
             returnedMods = mod;
         }
 
@@ -31,7 +33,11 @@ function ModList({ modList }) {
 
     return (
         <>
-            <input type="text" placeholder="Search mods" className="mod-list-search" onChange={event => { setSearchTerm(event.target.value) }} />
+            <h1 className="mod-list-header">Mod List</h1>
+
+            <div className="mod-search-container">
+                <input type="text" placeholder="Search mods" className="mod-list-search" onChange={event => { setState({ searchTerm: event.target.value }) }} />
+            </div>
 
             <div className="mod-list">
                 { modItems }

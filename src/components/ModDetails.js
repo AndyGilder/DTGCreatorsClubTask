@@ -2,61 +2,112 @@ import axios from 'axios';
 import ImageGallery from 'react-image-gallery';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LoadingSpinner from './LoadingSpinner';
 import './ModDetails.css';
 
 function ModDetails() {
   const [ state, setState ] = useState({
     modDetails: {},
-    galleryImages: ['test'],
+    galleryImages: [],
+    modOwner: '',
   });
   const { id } = useParams();
   const specificMod = `https://ugc-api.dovetailgames.com/mods/${id}`;
   const [ loadingSpinner, showLoadingSpinner, hideLoadingSpinner ] = LoadingSpinner();
 
   useEffect(() => {
-    showLoadingSpinner();
-    axios.get(specificMod)
-      .then(response => {
-        const galleryImages = [];
+    const getSpecificMod = async () => {
+      showLoadingSpinner();
+      const response = await axios.get(specificMod)
 
-        response.data.data.screenshots.map((screenshot) => (
-          galleryImages.push({ original: screenshot.url })
-        ))
+      const galleryImages = [];
+      const tags = [];
 
-        setState({
-          modDetails: response.data.data,
-          galleryImages: galleryImages,
-        });
+      Object.values(response.data.data.tags).forEach((tag) => {
+        tags.push({ id: tag.id, name: tag.name });
+      });
 
-        hideLoadingSpinner();
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      response.data.data.screenshots.map((screenshot) => (
+        galleryImages.push({ original: screenshot.url })
+      ))
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      setState({
+        modDetails: response.data.data,
+        galleryImages,
+        modOwner: await getUserProfile(response.data.data.owner),
+        tags,
+      });
+
+      hideLoadingSpinner();
+
+      return response;
+    }
+
+    getSpecificMod();
+  }, [specificMod]);
+
+  function getUserProfile(owner) {
+    let username = '';
+    let displayName = '';
+    let discriminator = '';
+
+    for (const [key, value] of Object.entries(owner)) {
+      if (key === 'username') {
+        username = value;
+      } else if (key === 'displayName') {
+        displayName = value;
+      } else if (key === 'discriminator') {
+        discriminator = value;
+      }
+    }
+
+    return <a className="mod-owner" href={`https://creatorsclub.dovetailgames.com/profile/${displayName}-${discriminator}/`} target="_blank" rel="noreferrer">{username}</a>;
+  }
 
   return (
-    <div className="mod-details-container">
+    <>
       { loadingSpinner }
 
-      <div className="mod-details-headline-container">
-        <h1>{ state.modDetails.title }</h1>
-        <div>{ state.modDetails.subscriberCount } subscribers</div>
-      </div>
+      <div className="mod-details-container">
+        <Link to="/" className="home-page-link">Back to home page</Link>
 
-      <div className="mod-gallery-container">
-        <ImageGallery items={state.galleryImages} showFullscreenButton={false} />
-      </div>
+        <div className="mod-details-headline-container">
+          <div>
+            <h1>{ state.modDetails.title }</h1>
+            <div>{ state.modDetails.subscriberCount } subscribers</div>
+          </div>
 
-      <div className="mod-details">
-        <div>
-          { state.modDetails.longDescription }
+          <div>
+            <h1>
+              { state.modOwner }
+            </h1>
+          </div>
+        </div>
+
+        <div className="mod-gallery-container">
+          <ImageGallery items={state.galleryImages} showFullscreenButton={false} />
+        </div>
+
+        <div className="mod-details">
+          <div>
+            <h2>Overview</h2>
+            <p>{ state.modDetails.longDescription }</p>
+
+            <div className="tag-list">
+              <h2>Tags:</h2>
+              {
+                state.tags?.map((tag, index) => {
+                  return (
+                    <span key={tag.id}>{tag.name}</span>
+                  )
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -3,6 +3,11 @@
 .mod-details-container {
     width: 80vw;
     margin: auto;
+    padding-top: 20px;
+}
+
+.home-page-link {
+    color: inherit;
 }
 
 .mod-gallery-container .image-gallery-image {
@@ -10,6 +15,9 @@
 }
 
 .mod-details-headline-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
@@ -20,6 +28,18 @@
 
 .mod-details {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
     margin-top: 20px;
+}
+
+.mod-owner {
+    color: inherit;
+    text-decoration: none;
+}
+
+.tag-list span {
+    padding: 10px 20px;
+    background: #c9d1d9;
+    color: #111;
+    margin-right: 10px;
+    border-radius: 20px;
 }
