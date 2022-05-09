@@ -4,10 +4,14 @@ import modListReducer from './reducers';
 import thunk from 'redux-thunk';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import './index.css';
 
-const store = createStore(modListReducer, applyMiddleware(thunk));
+const store = createStore(
+  modListReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
