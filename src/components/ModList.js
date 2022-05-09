@@ -1,13 +1,22 @@
-import './ModList.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchModList } from '../actions';
 import ModItem from './ModItem';
+import './ModList.css';
 
-function ModList({ modList }) {
+function ModList() {
+    const dispatch = useDispatch();
+    const modList = useSelector((state) => state);
+
+    useEffect(() => {
+        dispatch(fetchModList());
+    }, [dispatch])
+
     const [state, setState] = useState({
         searchTerm: '',
     });
 
-    const modItems = modList.filter((mod) => {
+    const modItems = modList?.filter((mod) => {
         let returnedMods;
 
         if (state.searchTerm === '') {
